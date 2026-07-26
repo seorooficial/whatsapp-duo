@@ -1,0 +1,29 @@
+{
+  "name": "whatsapp-duo",
+  "version": "1.0.0",
+  "description": "Two isolated WhatsApp Web sessions in one lightweight Linux desktop window",
+  "main": "main.js",
+  "author": "seorooficial",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/seorooficial/whatsapp-duo#readme",
+  "bugs": {
+    "url": "https://github.com/seorooficial/whatsapp-duo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seorooficial/whatsapp-duo.git"
+  },
+  "keywords": [
+    "linux",
+    "electron",
+    "whatsapp-web",
+    "multi-account",
+    "arch-linux",
+    "cachyos"
+  ],
+  "scripts": {
+    "start": "./whatsapp-duo",
+    "check": "node --check main.js && node --check preload.js && node --check renderer.js"
+  }
+}

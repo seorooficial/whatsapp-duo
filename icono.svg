@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">WhatsApp Duo</title>
+  <desc id="desc">Dos paneles superpuestos que representan dos sesiones independientes</desc>
+  <defs>
+    <linearGradient id="background" x1="38" y1="30" x2="220" y2="226" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142A35"/>
+      <stop offset="1" stop-color="#071016"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="70" y1="56" x2="188" y2="204" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2DD4A5"/>
+      <stop offset="1" stop-color="#159B82"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="12" y="12" width="232" height="232" rx="58" fill="url(#background)"/>
+
+  <rect x="55" y="51" width="92" height="146" rx="28" fill="#DFFAF2"/>
+  <circle cx="83" cy="80" r="7" fill="#159B82"/>
+  <path d="M80 116h43M80 139h29" fill="none" stroke="#159B82" stroke-width="9" stroke-linecap="round"/>
+
+  <rect x="109" y="59" width="92" height="146" rx="28" fill="url(#accent)" stroke="#071016" stroke-width="10"/>
+  <circle cx="137" cy="88" r="7" fill="#DFFAF2"/>
+  <path d="M134 124h40M134 147h28" fill="none" stroke="#DFFAF2" stroke-width="9" stroke-linecap="round"/>
+</svg>

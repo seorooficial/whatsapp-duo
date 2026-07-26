@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src https://web.whatsapp.com">
+<title>WhatsApp Duo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <nav id="rail">
+    <button class="tab active" data-i="0" title="Cuenta 1 (Ctrl+1)">
+      <span class="label">1</span>
+      <span class="badge" hidden>0</span>
+    </button>
+    <button class="tab" data-i="1" title="Cuenta 2 (Ctrl+2)">
+      <span class="label">2</span>
+      <span class="badge" hidden>0</span>
+    </button>
+    <div class="spacer"></div>
+    <button id="reload" class="rail-btn" title="Recargar cuenta activa">&#x21bb;</button>
+  </nav>
+  <section id="stage">
+    <div class="hint">Cargando WhatsApp&hellip;</div>
+    <webview id="wv0" class="show" src="https://web.whatsapp.com/"
+             partition="persist:cuenta1"
+             webpreferences="backgroundThrottling=true"></webview>
+    <webview id="wv1" data-src="https://web.whatsapp.com/"
+             partition="persist:cuenta2"
+             webpreferences="backgroundThrottling=true"></webview>
+  </section>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

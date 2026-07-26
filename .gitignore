@@ -1,0 +1,37 @@
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
+release/
+*.AppImage
+*.pkg.tar.*
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Electron/Chromium runtime data
+user-data/
+Partitions/
+Session Storage/
+Local Storage/
+IndexedDB/
+Cache/
+Code Cache/
+GPUCache/
+Cookies
+Cookies-journal
+Network Persistent State
+
+# Logs and editor files
+*.log
+.DS_Store
+.idea/
+.vscode/
+.superdesign/
+*~

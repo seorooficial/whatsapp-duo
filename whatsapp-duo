@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# whatsapp-duo — dos sesiones aisladas usando el Electron del sistema.
+set -uo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+USER_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whatsapp-duo"
+
+if [[ -n "${WHATSAPP_DUO_APP_DIR:-}" ]]; then
+  APP_DIR="$WHATSAPP_DUO_APP_DIR"
+elif [[ -f "$SCRIPT_DIR/main.js" ]]; then
+  APP_DIR="$SCRIPT_DIR"
+elif [[ -f "$USER_DATA_DIR/main.js" ]]; then
+  APP_DIR="$USER_DATA_DIR"
+elif [[ -f "/usr/local/share/whatsapp-duo/main.js" ]]; then
+  APP_DIR="/usr/local/share/whatsapp-duo"
+else
+  APP_DIR="/usr/share/whatsapp-duo"
+fi
+
+ELECTRON=""
+for candidate in electron electron43 electron42 electron41 electron40 electron39 electron38; do
+  if command -v "$candidate" >/dev/null 2>&1; then
+    ELECTRON="$candidate"
+    break
+  fi
+done
+
+if [[ -z "$ELECTRON" ]]; then
+  echo "whatsapp-duo: Electron no está instalado o no está en PATH" >&2
+  exit 1
+fi
+
+exec "$ELECTRON" "$APP_DIR" "$@"

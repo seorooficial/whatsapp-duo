@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Validate JavaScript and shell
+        run: |
+          make check
+          bash -n whatsapp-duo
+
+      - name: Verify installation layout
+        run: |
+          make install DESTDIR="$RUNNER_TEMP/package-root"
+          test -x "$RUNNER_TEMP/package-root/usr/bin/whatsapp-duo"
+          test -f "$RUNNER_TEMP/package-root/usr/share/whatsapp-duo/main.js"
+          test -f "$RUNNER_TEMP/package-root/usr/share/applications/whatsapp-duo.desktop"
+          test -f "$RUNNER_TEMP/package-root/usr/share/icons/hicolor/scalable/apps/whatsapp-duo.svg"

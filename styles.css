@@ -1,0 +1,149 @@
+:root {
+  --rail: #0b141a;
+  --rail-hi: #202c33;
+  --accent: #25d366;
+  --accent-dim: #1f6b46;
+  --txt: #e9edef;
+  --muted: #8696a0;
+  --badge: #00a884;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--rail);
+  color: var(--txt);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  -webkit-user-select: none;
+}
+
+#app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Barra lateral */
+#rail {
+  width: 68px;
+  flex: 0 0 68px;
+  background: var(--rail);
+  border-right: 1px solid #101c24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0 10px;
+  gap: 10px;
+}
+
+.tab {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  background: var(--rail-hi);
+  color: var(--txt);
+  font-size: 17px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+}
+
+.tab.active {
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 2px var(--accent) inset;
+}
+
+.tab.has-unread:not(.active) {
+  box-shadow: 0 0 0 2px rgba(0, 168, 132, 0.65) inset;
+}
+
+.tab .label {
+  font-size: 10px;
+}
+
+.badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--badge);
+  color: #04140d;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--rail);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.rail-btn {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.rail-btn:hover {
+  background: var(--rail-hi);
+  color: var(--txt);
+}
+
+/* Escenario con las dos webs */
+#stage {
+  position: relative;
+  flex: 1;
+  background: #0b141a;
+}
+
+webview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+webview.show {
+  display: flex;
+}
+
+/* Cargador mientras arranca WhatsApp */
+.hint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}

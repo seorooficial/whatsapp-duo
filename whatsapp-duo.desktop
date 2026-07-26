@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=WhatsApp Duo
+GenericName=Dual web messaging client
+GenericName[es]=Mensajería web dual
+Comment=Two WhatsApp Web accounts in one desktop window
+Comment[es]=Dos cuentas de WhatsApp Web en una sola ventana
+Exec=whatsapp-duo
+Icon=whatsapp-duo
+Terminal=false
+Categories=Network;InstantMessaging;
+Keywords=whatsapp;chat;messaging;multi-account;mensajeria;
+StartupNotify=true
+StartupWMClass=whatsapp-duo
