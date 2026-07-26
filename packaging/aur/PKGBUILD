@@ -1,0 +1,19 @@
+# Maintainer: seorooficial
+
+pkgname=whatsapp-duo
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Two isolated WhatsApp Web sessions in one lightweight Linux desktop app'
+arch=('any')
+url='https://github.com/seorooficial/whatsapp-duo'
+license=('MIT')
+depends=('electron')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('7b851844ef40174fc7190ad174485c9b81a2e60c8b91a82eaa996f6712e012bd')
+
+package() {
+  cd "$pkgname-$pkgver"
+
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
