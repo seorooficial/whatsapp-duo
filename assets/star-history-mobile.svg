@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="650" viewBox="0 0 700 650"
+     role="img" aria-labelledby="chart-title chart-description"
+     font-family="DejaVu Sans, Arial, sans-serif">
+  <title id="chart-title">Star growth for seorooficial/whatsapp-duo</title>
+  <desc id="chart-description">Cumulative GitHub stars since the repository was created. Current total: 1.</desc>
+  <defs>
+    <linearGradient id="backgroundGradient" x1="0" y1="0" x2="700" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10242E"/>
+      <stop offset="0.58" stop-color="#071016"/>
+      <stop offset="1" stop-color="#09171D"/>
+    </linearGradient>
+    <linearGradient id="areaGradient" x1="0" y1="210" x2="0" y2="566">
+      <stop stop-color="#2DD4A5" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#2DD4A5" stop-opacity="0.025"/>
+    </linearGradient>
+    <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="700" height="650" rx="28" fill="url(#backgroundGradient)"/>
+  <rect x="1" y="1" width="698" height="648" rx="27"
+        fill="none" stroke="#2DD4A5" stroke-opacity="0.18"/>
+
+      <text x="48" y="70" fill="#2DD4A5" font-size="15" font-weight="800" letter-spacing="4">STAR GROWTH</text>
+      <text x="48" y="116" fill="#F5FBFC" font-size="34" font-weight="800">whatsapp-duo</text>
+      <text x="48" y="147" fill="#8696A0" font-size="17">seorooficial · cumulative GitHub stars</text>
+      <text x="48" y="199" fill="#F5FBFC" font-size="62" font-weight="800"
+            font-variant-numeric="tabular-nums">1</text>
+      <text x="87" y="196" fill="#8696A0" font-size="17" font-weight="700">TOTAL STARS</text>
+  <g font-family="Inter, Segoe UI, system-ui, sans-serif">
+
+      <line x1="72" y1="566.5" x2="652" y2="566.5"
+            stroke="#DFFAF2" stroke-opacity="0.10" stroke-width="1" shape-rendering="crispEdges"/>
+      <text x="54" y="570.5" text-anchor="end"
+            fill="#8696A0" font-size="17" font-variant-numeric="tabular-nums">0</text>
+      <line x1="72" y1="210.5" x2="652" y2="210.5"
+            stroke="#DFFAF2" stroke-opacity="0.10" stroke-width="1" shape-rendering="crispEdges"/>
+      <text x="54" y="214.5" text-anchor="end"
+            fill="#8696A0" font-size="17" font-variant-numeric="tabular-nums">1</text>
+
+      <line x1="362.5" y1="210" x2="362.5" y2="566"
+            stroke="#DFFAF2" stroke-opacity="0.055" stroke-width="1" shape-rendering="crispEdges"/>
+      <text x="362.5" y="604" text-anchor="start"
+            fill="#8696A0" font-size="17">Jul 26</text>
+    <g filter="url(#lineGlow)">
+      <path d="M362.0,566.0 L362.0,210.0 L362.0,566.0 L362.0,566.0 Z" fill="url(#areaGradient)"/>
+      <path d="M362.0,566.0 L362.0,210.0" fill="none" stroke="#2DD4A5" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="362.0" cy="210.0"
+                  r="8"
+                  fill="#DFFAF2" stroke="#071016" stroke-width="2"/>
+      <text x="376"
+            y="228"
+            text-anchor="start"
+            fill="#DFFAF2" font-size="18" font-weight="700">
+        1 star · Jul 26
+      </text></g>
+    <text x="72" y="625" fill="#627A85" font-size="14"
+          font-weight="700" letter-spacing="2">SOURCE · GITHUB API</text>
+    <text x="652" y="625" text-anchor="end" fill="#627A85"
+          font-size="14" font-weight="700" letter-spacing="2">
+      CUMULATIVE · UTC
+    </text>
+  </g>
+</svg>

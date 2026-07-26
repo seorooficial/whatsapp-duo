@@ -12,6 +12,7 @@ check:
 	node --check main.js
 	node --check preload.js
 	node --check renderer.js
+	node --check scripts/generate-star-history.mjs
 
 install:
 	install -d "$(DESTDIR)$(APPDIR)"

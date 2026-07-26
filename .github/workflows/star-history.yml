@@ -1,0 +1,43 @@
+name: Update star chart
+
+on:
+  watch:
+    types: ["started"]
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: star-history
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Generate cumulative star chart
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/generate-star-history.mjs \
+            assets/star-history.svg \
+            assets/star-history-mobile.svg
+
+      - name: Publish only when the data changes
+        run: |
+          if git diff --quiet -- assets/star-history.svg assets/star-history-mobile.svg; then
+            echo "Star data is unchanged."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/star-history.svg assets/star-history-mobile.svg
+          git commit -m "chore: update star history [skip ci]"
+          git push

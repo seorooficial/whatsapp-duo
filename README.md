@@ -138,10 +138,21 @@ flowchart LR
 
 ## Project growth
 
-The badges use live GitHub data and refresh automatically:
+The counter and graph use live GitHub data. The graph is generated inside this
+repository when the star data changes—no third-party chart service or exposed
+token:
 
 <p align="center">
   <a href="https://github.com/seorooficial/whatsapp-duo/stargazers"><img alt="Live GitHub star count" src="https://img.shields.io/github/stars/seorooficial/whatsapp-duo?style=for-the-badge&logo=github&logoColor=DFFAF2&label=LIVE%20STARS&labelColor=071016&color=2DD4A5"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/seorooficial/whatsapp-duo/stargazers">
+    <picture>
+      <source media="(max-width: 600px)" srcset="assets/star-history-mobile.svg">
+      <img src="assets/star-history.svg" alt="Cumulative GitHub star growth for WhatsApp Duo" width="100%">
+    </picture>
+  </a>
 </p>
 
 If WhatsApp Duo is useful to you, a star helps other Linux users discover it.
