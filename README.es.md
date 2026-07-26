@@ -141,17 +141,11 @@ flowchart LR
 
 ## Crecimiento del proyecto
 
-Los indicadores superiores utilizan datos en vivo de GitHub. Este gráfico se
-actualizará conforme el proyecto reciba estrellas:
+Los indicadores utilizan datos en vivo de GitHub y se actualizan
+automáticamente:
 
 <p align="center">
-  <a href="https://www.star-history.com/#seorooficial/whatsapp-duo&Date">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=seorooficial/whatsapp-duo&type=Date&theme=dark">
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=seorooficial/whatsapp-duo&type=Date">
-      <img alt="Historial de estrellas de WhatsApp Duo" src="https://api.star-history.com/svg?repos=seorooficial/whatsapp-duo&type=Date">
-    </picture>
-  </a>
+  <a href="https://github.com/seorooficial/whatsapp-duo/stargazers"><img alt="Contador de estrellas de GitHub en vivo" src="https://img.shields.io/github/stars/seorooficial/whatsapp-duo?style=for-the-badge&logo=github&logoColor=DFFAF2&label=ESTRELLAS%20EN%20VIVO&labelColor=071016&color=2DD4A5"></a>
 </p>
 
 Si WhatsApp Duo te resulta útil, una estrella ayuda a que otros usuarios de
