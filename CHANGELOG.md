@@ -2,11 +2,13 @@
 
 All notable changes to this project will be documented here.
 
-## Unreleased
+## 1.0.1 - 2026-10-21
 
 - Memory: block WhatsApp Web's service worker (two ~120 MB processes saved) and use software
   compositing instead of a GPU process (~100 MB saved). About 25 % less memory at startup in our
   measurement. Environment switches: `WHATSAPP_DUO_ALLOW_SW`, `WHATSAPP_DUO_GPU`.
+- Add AUR packaging metadata under `packaging/aur`.
+- Add a self-hosted star-growth chart to the README files.
 
 ## 1.0.0 - 2026-07-26
 
