@@ -14,6 +14,9 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 // dos cuentas a dibujar frames y ejecutar timers incluso ocultas o en bandeja.
 // NVIDIA + Wayland: Vulkan no es compatible con el compositor -> usar OpenGL.
 app.commandLine.appendSwitch('disable-features', 'Vulkan')
+// Ahorro de memoria: la GPU de la app gastaba ~300 MB para pintar un chat; el compositor por software basta.
+// WHATSAPP_DUO_GPU=1 la vuelve a activar.
+if (process.env.WHATSAPP_DUO_GPU !== '1') app.commandLine.appendSwitch('disable-gpu')
 // app_id / WM_CLASS estable para que Hyprland/Waybar asocien el icono
 app.commandLine.appendSwitch('class', 'whatsapp-duo')
 
@@ -30,6 +33,16 @@ const CHROME_UA =
   'Chrome/' + process.versions.chrome + ' Safari/537.36'
 
 app.setName('WhatsApp Duo')
+
+// Ahorro de memoria: WhatsApp Web registra un service worker (caché sin conexión y notificaciones push) que corre en
+// un proceso propio de ~120 MB por cuenta. En Electron no existe servicio push, así que no se pierde ninguna
+// notificación: salen de la propia página. Se bloquea su registro y se borran los registros anteriores.
+// WHATSAPP_DUO_ALLOW_SW=1 lo permite de nuevo.
+function blockServiceWorker (ses) {
+  if (process.env.WHATSAPP_DUO_ALLOW_SW === '1') return
+  ses.webRequest.onBeforeRequest({ urls: [WHATSAPP_ORIGIN + '/sw.js*'] }, (_details, callback) => callback({ cancel: true }))
+  ses.clearStorageData({ storages: ['serviceworkers'] }).catch(() => {})
+}
 
 let mainWindow = null
 let tray = null
@@ -95,6 +108,7 @@ if (!gotLock) {
     for (const p of PARTITIONS) {
       const ses = session.fromPartition(p)
       ses.setUserAgent(CHROME_UA)
+      blockServiceWorker(ses)
       ses.setPermissionRequestHandler((wc, permission, cb, details) => {
         cb(ALLOWED_PERMISSIONS.has(permission) &&
           isTrustedPermissionOrigin(wc, '', details))

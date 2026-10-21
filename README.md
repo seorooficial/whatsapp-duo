@@ -44,6 +44,7 @@ service and uses the Electron package maintained by your Linux distribution.
 | **◇** | System Electron | No duplicated 200–300 MB Electron bundle |
 | **▣** | Wayland friendly | Native Ozone support with conservative NVIDIA defaults |
 | **○** | Zero npm dependencies | Small, auditable source tree with no analytics |
+| **▤** | Memory-aware | No unused service worker and no GPU process: about 25 % less memory at startup |
 
 ## Installation
 
@@ -102,6 +103,26 @@ This protects users from losing active sessions by accident.
 4. Close the window to keep it running in the tray; choose **Quit** from the
    tray menu to stop it completely.
 
+## Memory use
+
+WhatsApp Web is heavy, so two things that bought nothing here are switched off. Each is reversible with an environment
+variable:
+
+| Measure | Saves | Switch |
+| --- | --- | --- |
+| **No service worker.** WhatsApp Web registers one per account (`sw.js`), and each runs in its own ~120 MB process. Electron has no push service, so no notification is lost: they come from the page itself. | ~120 MB per account | `WHATSAPP_DUO_ALLOW_SW=1` |
+| **Software compositing** instead of a GPU process. | ~100 MB | `WHATSAPP_DUO_GPU=1` |
+
+Measured on one machine (Electron 42, Linux, Wayland) with logged-out accounts: **1,375 MB → 1,038 MB at startup (−25 %)**,
+and five renderer processes → three. Background sound and notifications keep working with the window hidden. Your numbers
+will differ.
+
+**A dead end, for the record.** Asking the pages to release memory through Electron's debugger API looked promising
+(−135 MB on a 630 MB account), but `Memory.forciblyPurgeJavaScriptMemory` simulates an out-of-memory intervention and
+**freezes the page until it is reloaded**, so the accounts silently stop syncing while the window is hidden. It is not used.
+In our tests the window's `webview` guests also reported `visibilityState === "visible"` while the window was hidden, so do
+not assume Chromium throttles them.
+
 ## Security and privacy
 
 The public repository never includes user profiles or linked-device sessions.
@@ -118,6 +139,7 @@ The application also applies the following restrictions:
 - Permission requests limited to the features required by WhatsApp Web and
   accepted only from its exact origin.
 - IPC messages validated against the trusted local window.
+- The service-worker registration of `web.whatsapp.com` is blocked; nothing else about the page's network access changes.
 
 Please report security issues privately by following [SECURITY.md](SECURITY.md).
 Do not include live QR codes, cookies or session files in an issue.

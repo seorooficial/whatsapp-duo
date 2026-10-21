@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented here.
 
+## Unreleased
+
+- Memory: block WhatsApp Web's service worker (two ~120 MB processes saved) and use software
+  compositing instead of a GPU process (~100 MB saved). About 25 % less memory at startup in our
+  measurement. Environment switches: `WHATSAPP_DUO_ALLOW_SW`, `WHATSAPP_DUO_GPU`.
+
 ## 1.0.0 - 2026-07-26
 
 - Two isolated persistent WhatsApp Web sessions in one window.

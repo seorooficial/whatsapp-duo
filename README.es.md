@@ -45,6 +45,7 @@ empaquetado por duplicado. La aplicación abre el servicio oficial
 | **◇** | Electron del sistema | No duplica un runtime de Electron de 200–300 MB |
 | **▣** | Preparado para Wayland | Ozone nativo y valores conservadores para NVIDIA |
 | **○** | Cero dependencias npm | Código pequeño y auditable, sin analítica |
+| **▤** | Atento a la memoria | Sin service worker inútil y sin proceso de GPU: ~25 % menos de memoria al arrancar |
 
 ## Instalación
 
@@ -103,6 +104,26 @@ inicio de sesión, evitando que se pierdan sesiones activas por accidente.
 4. Cierra la ventana para mantenerla en la bandeja; elige **Salir** en su menú
    para detenerla completamente.
 
+## Uso de memoria
+
+WhatsApp Web pesa mucho, así que se apagan dos cosas que aquí no aportaban nada. Cada una es reversible con una variable de
+entorno:
+
+| Medida | Ahorra | Interruptor |
+| --- | --- | --- |
+| **Sin service worker.** WhatsApp Web registra uno por cuenta (`sw.js`) y cada uno corre en su propio proceso de ~120 MB. Electron no tiene servicio push, así que no se pierde ninguna notificación: salen de la propia página. | ~120 MB por cuenta | `WHATSAPP_DUO_ALLOW_SW=1` |
+| **Composición por software** en lugar de un proceso de GPU. | ~100 MB | `WHATSAPP_DUO_GPU=1` |
+
+Medido en una máquina (Electron 42, Linux, Wayland) con cuentas sin sesión: **1.375 MB → 1.038 MB al arrancar (−25 %)**, y de
+cinco procesos de renderizado a tres. El sonido y las notificaciones en segundo plano siguen funcionando con la ventana oculta.
+Tus números serán distintos.
+
+**Un callejón sin salida, por si ayuda.** Pedir a las páginas que suelten memoria con la API de depuración de Electron parecía
+prometedor (−135 MB en una cuenta de 630 MB), pero `Memory.forciblyPurgeJavaScriptMemory` simula una intervención por falta de
+memoria y **congela la página hasta que se recarga**, de modo que las cuentas dejan de sincronizar en silencio con la ventana
+oculta. No se usa. Además, en nuestras pruebas los `webview` de la ventana informaron `visibilityState === "visible"` con la ventana oculta,
+así que no des por hecho que Chromium los ralentiza.
+
 ## Seguridad y privacidad
 
 El repositorio público nunca incluye perfiles de usuario ni sesiones de
@@ -120,6 +141,7 @@ La aplicación aplica además estas restricciones:
 - Permisos limitados a las funciones necesarias y aceptados solamente desde el
   origen exacto de WhatsApp Web.
 - Mensajes IPC validados contra la ventana local de confianza.
+- Se bloquea el registro del service worker de `web.whatsapp.com`; el resto del acceso de red de la página no cambia.
 
 Comunica problemas de seguridad en privado siguiendo
 [SECURITY.md](SECURITY.md). Nunca adjuntes códigos QR activos, cookies o
